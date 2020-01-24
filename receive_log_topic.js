@@ -62,7 +62,7 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                 
                 let midict = JSON.parse(msg.content.toString());
                 
-                // console.log(`xxx : ${JSON.stringify(midict)}`);
+                console.log(`xxx : ${JSON.stringify(midict)}`);
                 
                 insert = {};
 
@@ -104,7 +104,7 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                 if (midict['from_sensitive']) {
                     let from_sensitive =  midict['from_sensitive'];
                     r.db('csn').table('seiscomp').filter({'event_id': event_id}).update({'sensible':true}).run(connect)
-                    //console.log(`from_sensitive : ${event_id} ${JSON.stringify(from_sensitive)}`);
+                    console.log(`from_sensitive yyy : ${event_id} ${JSON.stringify(from_sensitive)}`);
                 }
                     
             }, {
