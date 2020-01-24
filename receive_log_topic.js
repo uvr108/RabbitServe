@@ -97,43 +97,13 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                         insert['author'] = ((from_mail['author']) ? from_mail['author']: null);
                         insert['sensible'] = null;
                         insert['version'] = null;
-
-                        // out = r.db('csn').table('seiscomp').filter({'evaluation_status':'final','year': 2020,'month':1,'event_id': 4200}).count().run(connect);
                        
-                        ejecuta(insert);
-                       
-                        /*
-                        r.table('seiscomp').limit(1).run(connect).then(function(cursor) {
-                            return cursor.toArray()
-                        }).then(function(results,a) {
-                            console.log(JSON.stringify(insert))
-                            //console.log(JSON.stringify(results));
-                        }).catch(function(err) {
-                            // process error
-                        })
-                        */
-
-                        /*
-                        r.table('seiscomp').filter({'evaluation_status':'final','year': year,'month': month,'event_id': event_id})
-                        .count()
-                        .run(connect).then(function(cursor) {
-                            return cursor; 
-                        })
-                        */
-
-                        // console.log(out);
-                        
-                        // insert['version'] = version;
-
-                        
-                        // console.log(`insert : ${JSON.stringify(insert)}`);
-                        // r.table('seiscomp').insert(insert).run(connect)
-                        // console.log(`yyy : ${JSON.stringify(insert)}`);
+                        ejecuta(insert);                       
 
                 }
                 if (midict['from_sensitive']) {
                     let from_sensitive =  midict['from_sensitive'];
-                    r.db('csn').table('seiscomp').filter({'event_id': event_id}).update({'sensible':true})
+                    r.db('csn').table('seiscomp').filter({'event_id': event_id}).update({'sensible':true}).run(connect)
                     //console.log(`from_sensitive : ${event_id} ${JSON.stringify(from_sensitive)}`);
                 }
                     
