@@ -61,8 +61,12 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                 // var time = msg.content['time'];
                 
                 let midict = JSON.parse(msg.content.toString());
-                
-                console.log(`xxx : ${JSON.stringify(midict)}`);
+                 if (midict['data']) {
+                     midict = midict['data']
+                 }
+                 
+
+                // console.log(`xxx : ${JSON.stringify(midict)}`);
                 
                 insert = {};
 
@@ -73,6 +77,7 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                         let from_mail =  midict['from_mail'];
                         // console.log(`from_mail : ${JSON.stringify(from_mail)}`);
                         time = from_mail['time'] = ((from_mail['time']) ? new Date(from_mail['time']): null);
+                        
                         year = time.getFullYear();
                         month = time.getMonth()+1;
 
@@ -90,6 +95,7 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                         insert['lat'] = from_mail['lat'];
                         insert['lon'] = from_mail['lon'];
                         insert['mag'] = from_mail['mag'];
+                        insert['process_delay'] = from_mail['delay'];
                         insert['mag_type'] = from_mail['mag_type'];
                         insert['station_count'] = from_mail['station_count'];
                         insert['evaluation_status'] = evaluation =  from_mail['evaluation_status'];
@@ -97,7 +103,7 @@ amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', functi
                         insert['author'] = ((from_mail['author']) ? from_mail['author']: null);
                         insert['sensible'] = null;
                         insert['version'] = null;
-                       
+                        console.log(`insert : ${insert}`);     
                         ejecuta(insert);                       
 
                 }
