@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 var connect = null;
 
 r = require('rethinkdb');
-r.connect( {host: '10.54.217.83', db: 'csn', port: 28015}, function(err, conn) {
+r.connect( {host: '127.0.0.1', db: 'csn', port: 28015}, function(err, conn) {
     if (err) throw err;
     connect = conn;
 })
@@ -33,7 +33,7 @@ function ingresar(mensaje, count) {
     console.log(JSON.stringify(mensaje));
 }
 
-amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', function(error0, connection) {
+amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
     if (error0) {
         throw error0;
     }
