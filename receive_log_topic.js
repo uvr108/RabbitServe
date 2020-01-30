@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 var connect = null;
 
 r = require('rethinkdb');
-r.connect( {host: '10.54.217.83', db: 'csn', port: 28015}, function(err, conn) {
+r.connect( {host: '10.54.223.18', db: 'csn', port: 28015}, function(err, conn) {
     if (err) throw err;
     connect = conn;
 })
@@ -33,7 +33,8 @@ function ingresar(mensaje, count) {
     // console.log(JSON.stringify(mensaje));
 }
 
-amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
+// amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
+amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', function(error0, connection) {
     if (error0) {
         throw error0;
     }
@@ -42,6 +43,8 @@ amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', functio
             throw error1;
         }
         var exchange = 'STD';
+
+        console.log('shogouki');
 
         channel.assertExchange(exchange, 'topic', {
             
@@ -64,7 +67,6 @@ amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', functio
                      midict = midict['data']
                  }
                 
-                // console.log(`xxx : ${JSON.stringify(midict)}`);
                 
                 insert = {};
 
