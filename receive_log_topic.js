@@ -33,7 +33,7 @@ function ingresar(mensaje, count) {
     // console.log(JSON.stringify(mensaje));
 }
 
-amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
+amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', function(error0, connection) {
     if (error0) {
         throw error0;
     }
@@ -90,6 +90,7 @@ amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', functio
                         let s = JSON.stringify(time + '+0000').replace(' ','T').replace(/\//g,'-').replace(/\"/g,'');
                         let d = new Date(Date.parse(s));
                         let fecha_even = d.toUTCString();
+                        
                         let epoch_event = new Date(s.substring(0,4),s.substring(5,7), s.substring(8,10), s.substring(11,13), s.substring(14,16),  s.substring(17,19)).getTime()/1000;
       
                         let year = Number(s.substring(0,4));
@@ -97,8 +98,8 @@ amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', functio
 
                         let diff = Number(((epoch_email - epoch_event)/60).toFixed(2));
 
-                        insert['fecha_even'] = fecha_even;
-                        insert['fecha_email'] = fecha_email;
+                        insert['fecha_even'] = d; //fecha_even;
+                        insert['fecha_email'] = n; // fecha_email;
                         insert['year'] = year;
                         insert['month'] = month;
                         insert['n5']   = (((from_mail['evaluation_status'] == 'preliminary') && (from_mail['delay'] > 5)) ? true : null);
@@ -117,7 +118,7 @@ amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', functio
                         insert['sensible'] = null;
                         insert['version'] = null;
                         // console.log(`TIME : ${event_id} ${from_mail['time']} ${time} : email_delat -> ${insert['email_delay']} []: ${t} - ${mail_time}`);
-                        // console.log(`[event_id] ${event_id}`);
+                        // console.log(`[event_id] ${event_id} ${s} ${d}`);
                         // console.log(`insert : ${JSON.stringify(insert)}`);     
                         ejecuta(insert);                       
 
