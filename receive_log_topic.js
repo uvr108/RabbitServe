@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 var connect = null;
 
 r = require('rethinkdb');
-r.connect( {host: '10.54.217.83', db: 'csn', port: 28015}, function(err, conn) {
+r.connect( {host: '10.54.217.85', db: 'csn', port: 28015}, function(err, conn) {
     if (err) throw err;
     connect = conn;
 })
