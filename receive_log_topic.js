@@ -33,8 +33,8 @@ function ingresar(mensaje, count) {
     // console.log(JSON.stringify(mensaje));
 }
 
-// amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
-amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', function(error0, connection) {
+// amqp.connect('amqp://statistics:stdpass@shogouki.lan.csn.uchile.cl:5672', function(error0, connection) {
+   amqp.connect('amqp://statistics:stdpass@thumper.lan.csn.uchile.cl:5672', function(error0, connection) {
     if (error0) {
         throw error0;
     }
